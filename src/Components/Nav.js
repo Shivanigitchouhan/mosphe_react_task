@@ -3,35 +3,41 @@ import axios from "axios";
 export default function Nav() {
   let userName = localStorage.getItem("user");
   const [data, setData] = useState([]);
-  const[filterData , setFilterData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
 
   const getData = () => {
     let url = "https://jsonplaceholder.typicode.com/posts";
 
-    axios.get(url).then((res) =>{ setData(res.data)
-    setFilterData(res.data)}
-    );
+    axios.get(url).then((res) => {
+      setData(res.data);
+      setFilterData(res.data);
+    });
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const serchFun = (e) =>{
+  const serchFun = (e) => {
     //console.log(e)
-    if(e){
-     data.filter(obj => {
-      if(obj.id 
-        === parseInt(e)){
-        setFilterData ([obj])
-console.log(obj)
-      } })  
-    }else{
-      setFilterData(data)
+    if (e) {
+      // search by id
+      data.filter((obj) => {
+        if (obj.id === parseInt(e)) {
+          setFilterData([obj]);
+          console.log(obj);
+        }
+      });
+
+      // for search by title *****
+      // let result =data.filter(rol => rol.title.toLowerCase().includes(e.toLowerCase()) )
+      // setFilterData (result)
+      //*********************** */
+    } else {
+      setFilterData(data);
     }
-    
-  }
-console.log(filterData);
+  };
+  console.log(filterData);
   return (
     <>
       <nav
@@ -95,8 +101,12 @@ console.log(filterData);
               </a>
             </li>
             <li className="nav-item">
-              <a className="navbar-brand" href="#" style={{marginLeft:"6rem"}}>
-              {userName}
+              <a
+                className="navbar-brand"
+                href="#"
+                style={{ marginLeft: "6rem" }}
+              >
+                {userName}
               </a>
             </li>
             <li className="nav-item"></li>
@@ -108,7 +118,7 @@ console.log(filterData);
               type="search"
               placeholder="Search by id"
               aria-label="Search"
-              onChange={(e)=>serchFun(e.target.value)}
+              onChange={(e) => serchFun(e.target.value)}
             />
             <button
               className="btn btn-outline-success my-2 my-sm-0"
@@ -126,11 +136,17 @@ console.log(filterData);
           flexDirection: "column",
         }}
       >
-        <div style={{display:"flex",justifyContent:"center",marginTop:"3rem"}}>
-         <h2 >Table</h2> 
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "3rem",
+          }}
+        >
+          <h2>Table</h2>
         </div>
-        
-        <div style={{margin:'5rem'}}>
+
+        <div style={{ margin: "5rem" }}>
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -141,16 +157,16 @@ console.log(filterData);
               </tr>
             </thead>
             <tbody>
-            {filterData.map((item, key) => {
-            return (
-              <tr key={key}>
-                <td>{item.id}</td>
-                <td>{item.userId}</td>
-                <td>{item.title}</td>
-                <td>{item.body}</td>
-              </tr>
-            );
-          })}
+              {filterData.map((item, key) => {
+                return (
+                  <tr key={key}>
+                    <td>{item.id}</td>
+                    <td>{item.userId}</td>
+                    <td>{item.title}</td>
+                    <td>{item.body}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
