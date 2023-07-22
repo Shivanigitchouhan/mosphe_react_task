@@ -21,7 +21,7 @@ export default function Nav() {
   const serchFun = (e) => {
     //console.log(e)
     if (e) {
-      // search by id
+      // for search by id
       data.filter((obj) => {
         if (obj.id === parseInt(e)) {
           setFilterData([obj]);
@@ -37,7 +37,7 @@ export default function Nav() {
       setFilterData(data);
     }
   };
-  console.log(filterData);
+  //console.log(filterData);
   return (
     <>
       <nav
@@ -110,7 +110,7 @@ export default function Nav() {
               </a>
             </li>
             <li className="nav-item"></li>
-            <li className="nav-item">{/* {userName} */}</li>
+            <li className="nav-item"></li>
           </ul>
           <form className="d-flex w-50 mt-4">
             <input
@@ -129,6 +129,7 @@ export default function Nav() {
           </form>
         </div>
       </nav>
+      <hr></hr>
       <div
         style={{
           display: "flex",
@@ -140,13 +141,14 @@ export default function Nav() {
           style={{
             display: "flex",
             justifyContent: "center",
-            marginTop: "3rem",
+            marginTop: "1rem",
+             //border:'1px solid red'
           }}
         >
           <h2>Table</h2>
         </div>
 
-        <div style={{ margin: "5rem" }}>
+        <div style={{ marginTop: "3rem", justifyContent: "center",}}>
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -170,27 +172,6 @@ export default function Nav() {
             </tbody>
           </table>
         </div>
-        {/* <table style={{border:'1px solid black', width:800, backgroundColor:'skyBlue',cellSpacing:0}}>
-        <tbody>
-          <tr>
-            <th style={{width:5}}> user Id:</th>
-            <th style={{width:5}}> id </th>
-            <th style={{width:5}}> title:</th>
-            <th style={{width:5}}> body :</th>
-          </tr>
-
-          {data.slice(0,10).map((item, key) => {
-            return (
-              <tr key={key}>
-                <td>{item.userId}</td>
-                <td>{item.id}</td>
-                <td>{item.title}</td>
-                <td>{item.body}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table> */}
       </div>
     </>
   );

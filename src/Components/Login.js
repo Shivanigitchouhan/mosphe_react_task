@@ -13,7 +13,7 @@ export default function Login(){
     function submitFun(e){
         if((user.length>2 && password.length>2)){
             localStorage.setItem('user',user)
-            //alert("type correct value");
+            //lalert("type correct value");
             console.log(user);
             navigate("/nav");
         }
